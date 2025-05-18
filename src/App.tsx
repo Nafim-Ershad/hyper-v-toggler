@@ -10,7 +10,15 @@ function App() {
     borderRadius: '5px',
     marginTop: '20px'
   });
-
+  const [scanStyle, setScanStyle] = useState<React.CSSProperties>({
+    backgroundColor: '#fff',
+    padding: '10px',
+    border: "1px solid black",
+    borderRadius: '16px',
+    marginTop: '20px',
+    cursor: "pointer"
+  });
+  
   const checkStatus = async () => {
     try {
       const result = await invoke<string>('check_status');
@@ -25,6 +33,15 @@ function App() {
       setStatusStyle({ ...statusStyle, backgroundColor: '#fff3cd' });
     }
   };
+
+  const sfc = async () => {
+    try {
+      await invoke<string>("sfc_scan");
+    } catch (error) {
+      console.error('Scan failed:', error);
+      alert('Error Scanning');
+    }
+  }
 
   const enableHyperV = async () => {
     try {
@@ -54,18 +71,24 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Hyper-V Control</h1>
-      <div className="button-group">
-        <button onClick={enableHyperV} className="enable-button">
-          Enable Hyper-V
-        </button>
-        <button onClick={disableHyperV} className="disable-button">
-          Disable Hyper-V
-        </button>
-      </div>
-      <div id="status" style={statusStyle}>
-        {status}
-      </div>
+      <>
+      <h1>System File Checker</h1>
+      <div onClick={sfc} style={scanStyle}>Run Now</div>
+      </>
+      <>
+        <h1>Hyper-V Control</h1>
+        <div className="button-group">
+          <button onClick={enableHyperV} className="enable-button">
+            Enable Hyper-V
+          </button>
+          <button onClick={disableHyperV} className="disable-button">
+            Disable Hyper-V
+          </button>
+        </div>
+        <div id="status" style={statusStyle}>
+          {status}
+        </div>
+      </>
     </div>
   );
 }
