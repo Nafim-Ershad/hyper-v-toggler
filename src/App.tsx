@@ -10,7 +10,7 @@ function App() {
     borderRadius: '5px',
     marginTop: '20px'
   });
-  const [scanStyle, setScanStyle] = useState<React.CSSProperties>({
+  const [scanStyle, _setScanStyle] = useState<React.CSSProperties>({
     backgroundColor: '#fff',
     padding: '10px',
     border: "1px solid black",
@@ -86,7 +86,12 @@ function App() {
           </button>
         </div>
         <div id="status" style={statusStyle}>
-          {status}
+          <span>
+            {status}
+          </span>
+          <span>
+            Please restart the computer after changing Hyper-V status for changes to take effect.
+          </span>
         </div>
       </>
     </div>

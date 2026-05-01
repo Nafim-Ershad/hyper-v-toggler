@@ -48,4 +48,14 @@ button:hover {
   padding: 12px 24px;
   border-radius: 6px;
   font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 12px;
+}
+
+#status span:nth-child(2){
+  font-size: 10px;
+  font-style: italic;
 }
